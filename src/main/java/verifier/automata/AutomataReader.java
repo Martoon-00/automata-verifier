@@ -1,5 +1,14 @@
 package verifier.automata;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import javax.management.modelmbean.XMLParseException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -51,5 +60,28 @@ public class AutomataReader {
         automata.getTransitions().add(transition4);
 
         return automata;
+
+        // TODO: start with this
+        /*
+        // preparations
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(is);
+
+        doc.getDocumentElement().normalize();
+
+        // get automata name
+        Node nameNode = doc.getElementsByTagName("name").item(0);
+        if (nameNode.getNodeType() != Node.ELEMENT_NODE) {
+            throw new AutomataParseException("Name is absent");
+        }
+        Element nameElement = (Element) nameNode;
+        String name = nameElement.getTextContent();
+        Automata automata = new Automata(name);
+
+        // and so on...
+
+        return automata;
+        */
     }
 }
